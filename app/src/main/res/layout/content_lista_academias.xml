@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_nomeAcademia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nome Academia"/>
+        <TextView
+            android:id="@+id/tv_contatoAcademia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contato"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_mapa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_location_on_blue_a200_24dp"
+        android:text="Mapa"/>
+    <Button
+        android:id="@+id/btn_ligar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_call_green_200_24dp"
+        android:text="Ligar "/>
+</LinearLayout>
