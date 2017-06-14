@@ -31,21 +31,25 @@ public class AcademiaAdapter extends BaseAdapter {
         this.activity = activity;
     }
 
+    //tamanho da lista
     @Override
     public int getCount() {
         return academias.size();
     }
 
+    //obter item pela posição
     @Override
     public Academia getItem(int position) {
         return academias.get(position);
     }
 
+    //obtem o id de um item a partir da posição
     @Override
     public long getItemId(int position) {
         return academias.get(position).getId();
     }
 
+    //cria a view de listagem
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final Academia academia = academias.get(position);

@@ -150,15 +150,7 @@ public class MenuActivity extends AppCompatActivity
                         tratarRespostaAcademias(result);
                     }
                 });
-
-//                activity.runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        ml.setAdapter(new ProfessionalAdapter(profs, getActivity(), getActivity()));
-//                    }
-//                });
-
-
+                
             }
         });
     }

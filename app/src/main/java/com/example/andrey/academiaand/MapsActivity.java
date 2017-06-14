@@ -11,11 +11,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.CameraUpdate;
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private LatLng latlng;
+    private CameraUpdate cameraUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +40,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Double.parseDouble( academia.getLongitude() ));
         mMap.addMarker(new MarkerOptions().position(joaoPessoa).title( academia.getName() ));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(joaoPessoa));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(joaoPessoa, 110.0f));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(joaoPessoa));
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        goTolocation(Double.parseDouble(academia.getLatitude()), Double.parseDouble(academia.getLongitude()), 16.0f);
     }
 
-    public MarkerOptions createMarker(LatLng latLng, String title, String snipet){
-        MarkerOptions marker = new MarkerOptions();
-        marker.title(title);
-        marker.position(latLng);
-        marker.snippet(snipet);
-        return marker;
+    private void goTolocation(Double latitude, Double longitude, float zoom){
+        latlng = new LatLng(latitude, longitude);
+        cameraUpdate = CameraUpdateFactory.newLatLngZoom(latlng, zoom);
+        mMap.animateCamera(cameraUpdate);
     }
+
+
 }

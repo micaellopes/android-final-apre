@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_Entrar;
     private String result;
     LoginActivity login;
-    public boolean conexao;
+    public boolean conectado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,13 @@ public class LoginActivity extends AppCompatActivity {
         et_Senha = (EditText) findViewById(R.id.et_Senha);
         btn_Entrar = (Button) findViewById(R.id.btn_Entrar);
         checkBox = (CheckBox) findViewById(R.id.checkBox);
+
+//        A ÚNICA PARTE QUE FALTOU NA APRESENTAÇÃO FOI ESSA \/
+//        VALIDA SE EXISTE TOKEN NO SHAREDPREFERENCES
+          if (SharedPreferencesActivity.get(LoginActivity.this, Constantes.TOKEN, null) != null ) {
+              startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+              finish();
+        }
     }
 
 
@@ -91,15 +98,13 @@ public class LoginActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String usuarioJSON = gson.toJson(usuario);
 
-        Log.d("CORPO_REQUISIÇAO -> ", usuarioJSON);
-
         return usuarioJSON;
     }
 
     public void fazerLogin(View v){
         checkConnection();
 
-        if(!conexao){
+        if(!conectado){
             Toast.makeText(this, "Sem conexão com a internet!", Toast.LENGTH_SHORT).show();
         } else{
             OkHttpClient client = new OkHttpClient();
@@ -122,7 +127,6 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(Call call, final Response response) throws IOException {
                     try {
                         result = response.body().string();
-                        Log.d("CORPO_RESPOSTA -> ", result);
                     } catch(IOException e) {
                         e.printStackTrace();
                     }
@@ -164,9 +168,9 @@ public class LoginActivity extends AppCompatActivity {
         if (conectivtyManager.getActiveNetworkInfo() != null
                 && conectivtyManager.getActiveNetworkInfo().isAvailable()
                 && conectivtyManager.getActiveNetworkInfo().isConnected()) {
-            conexao = true;
+            conectado = true;
         } else {
-            conexao = false;
+            conectado = false;
         }
     }
 
